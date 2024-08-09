@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Características{% endblock %}
+
+{% block content %}
+<h1>Características</h1>
+<a href="{{ url_for('caracteristica_new') }}" class="btn btn-primary mb-3">Agregar Nueva Característica</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Descripción</th>
+            <th>Equipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for caracteristica in caracteristicas %}
+        <tr>
+            <td>{{ caracteristica.tipo }}</td>
+            <td>{{ caracteristica.descripcion }}</td>
+            <td>{{ caracteristica.equipo.nombre }}</td>
+            <td>
+                <a href="{{ url_for('caracteristica_edit', id=caracteristica.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('caracteristica_delete', id=caracteristica.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+{% endblock %}

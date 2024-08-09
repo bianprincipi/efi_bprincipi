@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Proveedores{% endblock %}
+
+{% block content %}
+<h1>Proveedores</h1>
+<a href="{{ url_for('proveedor_new') }}" class="btn btn-primary mb-3">Agregar Nuevo Proveedor</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Contacto</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for proveedor in proveedores %}
+        <tr>
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.contacto }}</td>
+            <td>
+                <a href="{{ url_for('proveedor_edit', id=proveedor.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('proveedor_delete', id=proveedor.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
