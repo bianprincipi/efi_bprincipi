@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Categorías{% endblock %}
+
+{% block content %}
+<h1>Categorías</h1>
+<a href="{{ url_for('marca_new') }}" class="btn btn-primary mb-3">Agregar Nueva Categoría</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for marca in marcas %}
+        <tr>
+            <td>{{ marca.nombre }}</td>
+            <td>
+                <a href="{{ url_for('marca_edit', id=marca.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('marca_delete', id=marca.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

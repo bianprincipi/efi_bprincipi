@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Stock{% endblock %}
+
+{% block content %}
+<h1>Stock</h1>
+<a href="{{ url_for('stock_new') }}" class="btn btn-primary mb-3">Agregar Nuevo Stock</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Equipo</th>
+            <th>Cantidad</th>
+            <th>Ubicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock.equipo.nombre }}</td>
+            <td>{{ stock.cantidad }}</td>
+            <td>{{ stock.ubicacion }}</td>
+            <td>
+                <a href="{{ url_for('stock_edit', id=stock.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('stock_delete', id=stock.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

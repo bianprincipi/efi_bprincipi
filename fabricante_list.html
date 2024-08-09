@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Fabricantes{% endblock %}
+
+{% block content %}
+<h1>Fabricantes</h1>
+<a href="{{ url_for('fabricante_new') }}" class="btn btn-primary mb-3">Agregar Nuevo Fabricante</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>País de Origen</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fabricante in fabricantes %}
+        <tr>
+            <td>{{ fabricante.nombre }}</td>
+            <td>{{ fabricante.pais_origen }}</td>
+            <td>
+                <a href="{{ url_for('fabricante_edit', id=fabricante.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('fabricante_delete', id=fabricante.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
